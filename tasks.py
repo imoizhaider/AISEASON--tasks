@@ -23,128 +23,128 @@ MODEL = os.getenv("MODEL")
 
 
 
-# def task1():
-#     print("=== TASK 1: Ask Anything ===")
-#     # ===========================================================
-# # TASK 1 — Ask Anything
-# # ===========================================================
-# # Make one API call asking the model any question you want.
-# # Print the model's reply.
-# #
-# # Hint: See 01_basic_call.py
-#     response = client.chat.completions.create(
-#         model=MODEL,
-#         messages=[
-#             {"role": "user", "content": "What is one interesting fact about the LLM?"}
-#         ],
-#     )
-#     print(response.choices[0].message.content)
+def task1():
+    print("=== TASK 1: Ask Anything ===")
+    # ===========================================================
+# TASK 1 — Ask Anything
+# ===========================================================
+# Make one API call asking the model any question you want.
+# Print the model's reply.
+#
+# Hint: See 01_basic_call.py
+    response = client.chat.completions.create(
+        model=MODEL,
+        messages=[
+            {"role": "user", "content": "What is one interesting fact about the LLM?"}
+        ],
+    )
+    print(response.choices[0].message.content)
 
 
 
 
-# # ===========================================================
-# # TASK 2 — Q&A Bot (Loop)
-# # ===========================================================
-# # Build a simple loop:
-# #   1. Ask user to type a question (input())
-# #   2. Send it to the model
-# #   3. Print the answer
-# #   4. Repeat until user types "quit"
-# #
-# # Hint: use a while loop + 01_basic_call.py pattern
+# ===========================================================
+# TASK 2 — Q&A Bot (Loop)
+# ===========================================================
+# Build a simple loop:
+#   1. Ask user to type a question (input())
+#   2. Send it to the model
+#   3. Print the answer
+#   4. Repeat until user types "quit"
+#
+# Hint: use a while loop + 01_basic_call.py pattern
 
-# def task2():
-#     print("=== TASK 2: Q&A Bot ===")
-#     print("Type 'quit' to exit.\n")
-#     # YOUR CODE HERE
-#     while True:
-#         user_input = input("You: ")
-#         if user_input.lower() == "quit":
-#             break
-#         response = client.chat.completions.create(
-#             model=MODEL,
-#             messages=[
-#                 {"role": "user", "content": user_input}
-#             ],
-#         )
-#         print(f"Bot: {response.choices[0].message.content}")
+def task2():
+    print("=== TASK 2: Q&A Bot ===")
+    print("Type 'quit' to exit.\n")
+    # YOUR CODE HERE
+    while True:
+        user_input = input("You: ")
+        if user_input.lower() == "quit":
+            break
+        response = client.chat.completions.create(
+            model=MODEL,
+            messages=[
+                {"role": "user", "content": user_input}
+            ],
+        )
+        print(f"Bot: {response.choices[0].message.content}")
 
 
-# # ===========================================================
-# # TASK 3 — Chatbot with Memory
-# # ===========================================================
-# # Same as Task 2 BUT the bot remembers the full conversation.
-# # Test it: tell it your name, then later ask "what is my name?"
-# #
-# # Hint: See 03_chat_history.py — maintain a history list
+# ===========================================================
+# TASK 3 — Chatbot with Memory
+# ===========================================================
+# Same as Task 2 BUT the bot remembers the full conversation.
+# Test it: tell it your name, then later ask "what is my name?"
+#
+# Hint: See 03_chat_history.py — maintain a history list
 
-# def task3():
-#     print("=== TASK 3: Chatbot with Memory ===")
-#     print("Type 'quit' to exit.\n")
-#     history = [
-#         {"role": "system", "content": "You are a helpful assistant. Keep answer precise and concise."}
+def task3():
+    print("=== TASK 3: Chatbot with Memory ===")
+    print("Type 'quit' to exit.\n")
+    history = [
+        {"role": "system", "content": "You are a helpful assistant. Keep answer precise and concise."}
 
-#     ]
+    ]
 
-    # # YOUR CODE HERE
-    # def chat_with_memory():
-    #     while True:
-    #         user_input = input("You: ")
-    #         if user_input.lower() == "quit":
-    #             break
-    #         history.append({"role": "user", "content": user_input})
-    #         response = client.chat.completions.create(
-    #             model=MODEL,
-    #             messages=history,
-    #         )
-    #         bot_reply = response.choices[0].message.content
-    #         print(f"Bot: {bot_reply}")
-    #         history.append({"role": "assistant", "content": bot_reply})
-    #         # return bot_reply.contentne 
-    # history = [{"role": "system", "content": "You are a helpful assistant. Keep answer precise and concise."}]
-    # chat_with_memory()
+    # YOUR CODE HERE
+    def chat_with_memory():
+        while True:
+            user_input = input("You: ")
+            if user_input.lower() == "quit":
+                break
+            history.append({"role": "user", "content": user_input})
+            response = client.chat.completions.create(
+                model=MODEL,
+                messages=history,
+            )
+            bot_reply = response.choices[0].message.content
+            print(f"Bot: {bot_reply}")
+            history.append({"role": "assistant", "content": bot_reply})
+            # return bot_reply.contentne 
+    history = [{"role": "system", "content": "You are a helpful assistant. Keep answer precise and concise."}]
+    chat_with_memory()
     
 
 
 
-# # ===========================================================
-# # TASK 4 — Streaming Chatbot
-# # ===========================================================
-# # Same as Task 3 BUT stream the response token-by-token
-# # so it feels faster to the user.
-# #
-# # # Hint: See 02_streaming.py — stream=True + for chunk in stream
+# ===========================================================
+# TASK 4 — Streaming Chatbot
+# ===========================================================
+# Same as Task 3 BUT stream the response token-by-token
+# so it feels faster to the user.
+#
+# # Hint: See 02_streaming.py — stream=True + for chunk in stream
 
-# def task4():
-#     print("=== TASK 4: Streaming Chatbot ===")
-#     print("Type 'quit' to exit.\n")
-#     history = [
-#         {"role": "system", "content": "You are a helpful assistant."}
-#     ]
-#     while True:
-#         user_input = input("You: ")
-#         if user_input.lower() == "quit":
-#             break
+def task4():
+    print("=== TASK 4: Streaming Chatbot ===")
+    print("Type 'quit' to exit.\n")
+    history = [
+        {"role": "system", "content": "You are a helpful assistant."}
+    ]
+    while True:
+        user_input = input("You: ")
+        if user_input.lower() == "quit":
+            break
 
-#         history.append({"role": "user", "content": user_input})
-#         stream = client.chat.completions.create(
-#             model=MODEL,
-#             messages=history,
-#             stream=True,
-#         )
+        history.append({"role": "user", "content": user_input})
+        stream = client.chat.completions.create(
+            model=MODEL,
+            messages=history,
+            stream=True,
+        )
 
-#         print("Bot: ", end="", flush=True)
-#         assistant_reply = []
+        print("Bot: ", end="", flush=True)
+        assistant_reply = []
 
-#         for chunk in stream:
-#             delta = chunk.choices[0].delta.content
-#             if delta:
-#                 assistant_reply.append(delta)
-#                 print(delta, end="", flush=True)
+        for chunk in stream:
+            delta = chunk.choices[0].delta.content
+            if delta:
+                assistant_reply.append(delta)
+                print(delta, end="", flush=True)
 
-#         print()
-#         history.append({"role": "assistant", "content": "".join(assistant_reply)})
+        print()
+        history.append({"role": "assistant", "content": "".join(assistant_reply)})
 
 
 
@@ -154,27 +154,27 @@ MODEL = os.getenv("MODEL")
 # Create a chatbot with a custom persona using a system prompt.
 # Ideas: a chef, a doctor, a Shakespearean actor, a rapper.
 # User talks to it in a loop.
-#
+
 # Hint: Set "role": "system" with a creative persona description.
 #       See 04_parameters.py pirate example.
 
-# def task5():
-#     print("=== TASK 5: Persona Bot ===")
-#     persona = "You are a philosopher who only answers like a philosopher."
-#     history = [{"role": "system", "content": persona}]
-#     print(f"Persona: {persona}\nType 'quit' to exit.\n")
-#     while True:
-#         user_input = input("You: ")
-#         if user_input.lower() == "quit":
-#             break
-#         history.append({"role": "user", "content": user_input})
-#         response = client.chat.completions.create(
-#             model=MODEL,
-#             messages=history,
-#         )
-#         bot_reply = response.choices[0].message.content
-#         print(f"Philosopher: {bot_reply}")
-#         history.append({"role": "assistant", "content": bot_reply})
+def task5():
+    print("=== TASK 5: Persona Bot ===")
+    persona = "You are a philosopher who only answers like a philosopher."
+    history = [{"role": "system", "content": persona}]
+    print(f"Persona: {persona}\nType 'quit' to exit.\n")
+    while True:
+        user_input = input("You: ")
+        if user_input.lower() == "quit":
+            break
+        history.append({"role": "user", "content": user_input})
+        response = client.chat.completions.create(
+            model=MODEL,
+            messages=history,
+        )
+        bot_reply = response.choices[0].message.content
+        print(f"Philosopher: {bot_reply}")
+        history.append({"role": "assistant", "content": bot_reply})
 
 
 # ===========================================================
@@ -184,28 +184,28 @@ MODEL = os.getenv("MODEL")
 # Translate it to Urdu using the model.
 # Print the translation.
 # Bonus: let the user pick the target language.
-#
+
 # Hint: Use system prompt to set translator role.
 
-# def task6():
-#     print("=== TASK 6: Language Translator ===")
-#     target_language = input("Target language [Urdu]: ").strip() or "Urdu"
-#     sentence = input("Enter an English sentence: ").strip()
+def task6():
+    print("=== TASK 6: Language Translator ===")
+    target_language = input("Target language [Urdu]: ").strip() or "Urdu"
+    sentence = input("Enter an English sentence: ").strip()
 
-#     response = client.chat.completions.create(
-#         model=MODEL,
-#         messages=[
-#             {
-#                 "role": "system",
-#                 "content": (
-#                     f"You are a translation assistant. Translate the user's English text into {target_language}. "
-#                     "Return only the translated text."
-#                 ),
-#             },
-#             {"role": "user", "content": sentence},
-#         ],
-#     )
-#     print(f"{target_language}: {response.choices[0].message.content}")
+    response = client.chat.completions.create(
+        model=MODEL,
+        messages=[
+            {
+                "role": "system",
+                "content": (
+                    f"You are a translation assistant. Translate the user's English text into {target_language}. "
+                    "Return only the translated text."
+                ),
+            },
+            {"role": "user", "content": sentence},
+        ],
+    )
+    print(f"{target_language}: {response.choices[0].message.content}")
 
 
 
@@ -216,37 +216,37 @@ MODEL = os.getenv("MODEL")
 #   0.0, 0.7, 1.5
 # Print all 3 responses and compare them.
 # Notice: low temp = consistent, high temp = creative/random.
-#
+
 # Hint: See 04_parameters.py temperature section.
 
-# def task7():
-#     print("=== TASK 7: Temperature Experiment ===")
-#     while True:
-#         prompt = input("Enter a prompt (or type 'quit' to exit): ").strip()
-#         if prompt.lower() == "quit":
-#             break
-#         temperatures = [0.0, 0.7, 1.5]
-#         for temp in temperatures:
-#             response = client.chat.completions.create(
-#                 model=MODEL,
-#                 messages=[
-#                     {"role": "user", "content": prompt}
-#                 ],
-#                 temperature=temp,
-#             )
-#             print(f"Temperature {temp}: {response.choices[0].message.content}")
-#     prompt = input("Enter a prompt: ").strip()
-#     temperatures = [0.0, 0.7, 1.5]
-#     # YOUR CODE HERE
-#     for temp in temperatures:
-#         response = client.chat.completions.create(
-#             model=MODEL,
-#             messages=[
-#                 {"role": "user", "content": prompt}
-#             ],
-#             temperature=temp,
-#         )
-#         print(f"Temperature {temp}: {response.choices[0].message.content}")
+def task7():
+    print("=== TASK 7: Temperature Experiment ===")
+    while True:
+        prompt = input("Enter a prompt (or type 'quit' to exit): ").strip()
+        if prompt.lower() == "quit":
+            break
+        temperatures = [0.0, 0.7, 1.5]
+        for temp in temperatures:
+            response = client.chat.completions.create(
+                model=MODEL,
+                messages=[
+                    {"role": "user", "content": prompt}
+                ],
+                temperature=temp,
+            )
+            print(f"Temperature {temp}: {response.choices[0].message.content}")
+    prompt = input("Enter a prompt: ").strip()
+    temperatures = [0.0, 0.7, 1.5]
+    # YOUR CODE HERE
+    for temp in temperatures:
+        response = client.chat.completions.create(
+            model=MODEL,
+            messages=[
+                {"role": "user", "content": prompt}
+            ],
+            temperature=temp,
+        )
+        print(f"Temperature {temp}: {response.choices[0].message.content}")
 
 
 
@@ -286,11 +286,11 @@ def task8():
 # Run one task at a time — comment/uncomment as needed
 # ===========================================================
 
-# task1()
-# task2()
-# task3()
-# task4()
-# task5()
-# task6()
-# task7()
+task1()
+task2()
+task3()
+task4()
+task5()
+task6()
+task7()
 task8()
